@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+
+  backend:
+    build: ./
+    volumes:
+      - ./src:/app/src
+      # - ./migrations:/app/migrations
+      # - ./seeders:/app/seeders
+    command: sh -c "/wait && npm run dev"
+    ports:
+      - "8081:8081"
+    restart: "no"
+    depends_on:
+      - database
+    environment:
+      NODE_ENV: development
+      DB_HOST: database
+      DB_NAME: my-devices-develop
+      DB_USERNAME: mydevicesdevelop
+      DB_PASSWORD: mydevicesdevelop
+      WAIT_HOSTS: database:3306
+
+  database:
+    image: mariadb:10.4
+    environment:
+      # MYSQL_ROOT_PASSWORD: none
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: my-devices-develop
+      MYSQL_USER: mydevicesdevelop
+      MYSQL_PASSWORD: mydevicesdevelop
+    restart: "no"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
