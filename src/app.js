@@ -4,11 +4,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send({
-    message: `Welcome to the API of My-Devices`,
-  });
-});
+app.use("/", require("./api/routes"));
 
 // Expose app 
 module.exports = app; 
