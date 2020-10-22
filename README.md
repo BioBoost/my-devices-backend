@@ -9,3 +9,9 @@ To start the app in development mode:
 ```bash
 docker-compose -f docker-compose.development.yaml up
 ```
+
+### Migrating the Database
+
+```bash
+docker-compose -f docker-compose.development.yaml exec backend npx sequelize-cli db:migrate
+```
