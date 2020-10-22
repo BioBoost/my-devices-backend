@@ -6,7 +6,7 @@ services:
     build: ./
     volumes:
       - ./src:/app/src
-      # - ./migrations:/app/migrations
+      - ./migrations:/app/migrations
       - ./seeders:/app/seeders
     command: sh -c "/wait && npm run dev"
     ports:
