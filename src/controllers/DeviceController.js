@@ -27,4 +27,14 @@ module.exports = {
     }
   },
 
+  async create(req, res) {
+    try {
+      const device = await Devices.create(req.body);
+      res.status(201).send(device);
+    } catch (error) {
+      console.log(error);
+      Responder.internal(res, 'An unknown error has occurred while creating the device.');
+    }
+  },
+
 };

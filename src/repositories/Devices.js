@@ -13,6 +13,10 @@ let Devices = {
       }
     })
   },
+
+  create: (obj) => {
+    return db.Device.create(obj);
+  }
 }
 
 module.exports = Devices;
