@@ -10,6 +10,12 @@ To start the app in development mode:
 docker-compose -f docker-compose.development.yaml up
 ```
 
+or force a rebuild
+
+```bash
+docker-compose -f docker-compose.development.yaml up --build
+```
+
 ### Migrating the Database
 
 ```bash
