@@ -4,14 +4,26 @@ let Devices = {
 
   findAll: () => {
     return db.Device.findAll({
-      attributes: { exclude: ['description', 'hostname', 'location', 'createdAt', 'updatedAt'] }
+      attributes: { exclude: ['description', 'UserId', 'hostname', 'location', 'createdAt', 'updatedAt'] },
+      include: [{
+        model: db.User,
+        attributes: {
+          exclude: ['email', 'password', 'createdAt', 'updatedAt'],    
+        }
+      }],
     })
   },
 
   findById: (id) => {
     return db.Device.findOne({
+      attributes: { exclude: ['UserId', 'hostname', 'location'] },
       include: [{
         model: db.IPReport,
+      },{
+        model: db.User,
+        attributes: {
+          exclude: ['email', 'password', 'createdAt', 'updatedAt'],    
+        }
       }],
       where: {
         id: id

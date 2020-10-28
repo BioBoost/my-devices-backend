@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const IPReport = sequelize.define('IPReport', {
     ip: DataTypes.STRING,
     mac: DataTypes.STRING,
-    deviceId: DataTypes.INTEGER
+    DeviceId: DataTypes.INTEGER
   }, {});
   IPReport.associate = function(models) {
     models.IPReport.belongsTo(models.Device, {

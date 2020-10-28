@@ -14,7 +14,7 @@ module.exports = {
       mac: {
         type: Sequelize.STRING
       },
-      deviceId: {
+      DeviceId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

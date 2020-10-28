@@ -20,7 +20,7 @@ module.exports = {
       location: {
         type: Sequelize.STRING
       },
-      userId: {
+      UserId: {
         type: Sequelize.INTEGER
       },
       image: {
