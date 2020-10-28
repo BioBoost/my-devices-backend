@@ -1,18 +1,39 @@
 const DeviceController = require("../controllers/DeviceController");
+const AuthenticationController = require("../controllers/AuthenticationController");
+
+const passport = require('passport');
+const Authorization = require('../helpers/authorization');
 
 // Validation
 const validate = require('../validation/validate');
 const deviceSchema = require('../validation/schemas/device');
+const userSchema = require('../validation/schemas/user');
 
 const express = require("express");
 app = express.Router();
 
 // Welcome
-app.get("/", (req, res) => {
+app.get("/", Authorization.required, (req, res) => {
   res.send({
-    message: `Welcome to the API of My-Devices`,
+    message: `Welcome ${req.user.firstname} ${req.user.lastname}`,
   });
 });
+
+// Authentication
+app.post(
+  "/register",
+  Authorization.none,
+  validate.body(userSchema.register.body),
+  AuthenticationController.register
+);
+
+// Use passport authentication middleware
+app.post('/login', passport.authenticate('local', {
+  failureRedirect: '/'
+}), AuthenticationController.login);
+
+// Clear session
+app.delete('/logout', Authorization.required, AuthenticationController.logout);
 
 // Devices
 app.get('/devices', DeviceController.index);

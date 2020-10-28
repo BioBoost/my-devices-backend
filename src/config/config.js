@@ -8,4 +8,12 @@ module.exports = {
     domain: process.env.DOMAIN || "localhost",
     protocol: process.env.PROTOCOL || "http"
   },
+  frontend: {
+    protocol: process.env.FRONTEND_PROTOCOL || "http",
+    domain: process.env.FRONTEND_DOMAIN || "localhost",
+    port: process.env.FRONTEND_PORT || 8080
+  },
+  authentication: {
+    secret: process.env.SESSION_SECRET || "thisisnotverysecret"
+  },
 };
