@@ -7,7 +7,7 @@ module.exports = {
       type: 'Raspberry Pi',
       description: 'Counts the number of different MAC addresses in the network',
       location: '2.85',
-      userId: null,
+      userId: 1,
       image: 'https://www.yetanotherblog.com/wp-content/uploads/2014/03/IMG_20140325_105251-300x267.jpg',
       hostname: 'wificounter',
       createdAt: new Date(),

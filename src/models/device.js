@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.Device.hasMany(models.IPReport, {
         onDelete: "CASCADE"
+      }),
+      models.Device.belongsTo(models.User, {
+        onDelete: "CASCADE"
       })
     }
   };

@@ -28,9 +28,10 @@ docker-compose -f docker-compose.development.yaml exec backend npx sequelize-cli
 docker-compose -f docker-compose.development.yaml exec backend npx sequelize-cli db:seed:all
 ```
 
-### Clearing the Database
+### Resetting the Database
 
 ```bash
-docker-compose -f docker-compose.development.yaml exec backend npx sequelize-cli db:seed:undo:all
 docker-compose -f docker-compose.development.yaml exec backend npx sequelize-cli db:migrate:undo:all
+docker-compose -f docker-compose.development.yaml exec backend npx sequelize-cli db:migrate
+docker-compose -f docker-compose.development.yaml exec backend npx sequelize-cli db:seed:all
 ```
