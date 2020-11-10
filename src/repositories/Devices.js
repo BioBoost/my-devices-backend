@@ -16,7 +16,7 @@ let Devices = {
 
   findById: (id) => {
     return db.Device.findOne({
-      attributes: { exclude: ['UserId', 'hostname', 'location'] },
+      attributes: { exclude: ['UserId',] },
       include: [{
         model: db.IPReport,
       },{
