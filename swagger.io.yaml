@@ -1,0 +1,373 @@
+swagger: '2.0'
+info:
+  description: Description of the My-Devices API
+  version: 1.0.0
+  title: My-Devices API
+  # put the contact info for your development or API team
+  contact:
+    email: nico.dewitte@vives.be
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: users
+  description: Secured for registered users only
+- name: public
+  description: Available for all
+
+paths:
+  /devices:
+    get:
+      tags:
+      - users
+      summary: Get a listing of all devices
+      produces:
+      - application/json
+      responses:
+        200:
+          description: A listing of all devices
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: Telraam
+                type:
+                  type: string
+                  example: Raspberry Pi 3
+                image:
+                  type: string
+                  format: url
+                  example: https://via.placeholder.com/150
+                User:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 2
+                    firstname:
+                      type: string
+                      example: Nico
+                    lastname:
+                      type: string
+                      example: De Witte
+    post:
+      tags:
+      - users
+      summary: Create a new device
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: Device
+        description: Device to create
+        schema:
+          $ref: '#/definitions/Device'
+      responses:
+        201:
+          description: device created
+  /devices/{id}:
+    get:
+      tags:
+      - users
+      summary: Get device details
+      parameters:
+      - name: id
+        in: path
+        description: ID of device to return
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      responses:
+        200:
+          description: The details of a device
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: Telraam
+                type:
+                  type: string
+                  example: Raspberry Pi 3
+                description:
+                  type: string
+                  example: Counts the number of vehicles passing by
+                location:
+                  type: string
+                  example: LAB 2.85
+                image:
+                  type: string
+                  format: url
+                  example: https://via.placeholder.com/150
+                hostname:
+                  type: string
+                  example: telraam
+                createdAt:
+                  type: string
+                  example: "2020-11-10T11:56:55.000Z"
+                updatedAt:
+                  type: string
+                  example: "2020-11-10T11:56:55.000Z"
+                IPReports:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      ip:
+                        type: string
+                        example: 123.2.2.1
+                      mac:
+                        type: string
+                        example: AA:BB:CC:DD:EE:FF
+                      DeviceId:
+                        type: integer
+                        example: 1
+                      createdAt:
+                        type: string
+                        example: "2020-11-10T11:56:55.000Z"
+                      updatedAt:
+                        type: string
+                        example: "2020-11-10T11:56:55.000Z"
+                User:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 2
+                    firstname:
+                      type: string
+                      example: Nico
+                    lastname:
+                      type: string
+                      example: De Witte
+        404:
+          description: Device not found
+  /devices/{id}/claim:
+    patch:
+      tags:
+      - users
+      summary: Claim a device as your own
+      parameters:
+      - name: id
+        in: path
+        description: ID of device to be claimed
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      responses:
+        200:
+          description: The updated details of a device
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: Telraam
+                type:
+                  type: string
+                  example: Raspberry Pi 3
+                description:
+                  type: string
+                  example: Counts the number of vehicles passing by
+                location:
+                  type: string
+                  example: LAB 2.85
+                image:
+                  type: string
+                  format: url
+                  example: https://via.placeholder.com/150
+                hostname:
+                  type: string
+                  example: telraam
+                createdAt:
+                  type: string
+                  example: "2020-11-10T11:56:55.000Z"
+                updatedAt:
+                  type: string
+                  example: "2020-11-10T11:56:55.000Z"
+                IPReports:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      ip:
+                        type: string
+                        example: 123.2.2.1
+                      mac:
+                        type: string
+                        example: AA:BB:CC:DD:EE:FF
+                      DeviceId:
+                        type: integer
+                        example: 1
+                      createdAt:
+                        type: string
+                        example: "2020-11-10T11:56:55.000Z"
+                      updatedAt:
+                        type: string
+                        example: "2020-11-10T11:56:55.000Z"
+                User:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 2
+                    firstname:
+                      type: string
+                      example: Nico
+                    lastname:
+                      type: string
+                      example: De Witte
+        404:
+          description: Device not found
+        409:
+          description: Device has already been claimed
+  /devices/{id}/release:
+    patch:
+      tags:
+      - users
+      summary: Release a device of your own
+      parameters:
+      - name: id
+        in: path
+        description: ID of device to be released
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      responses:
+        200:
+          description: The updated details of a device
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: Telraam
+                type:
+                  type: string
+                  example: Raspberry Pi 3
+                description:
+                  type: string
+                  example: Counts the number of vehicles passing by
+                location:
+                  type: string
+                  example: LAB 2.85
+                image:
+                  type: string
+                  format: url
+                  example: https://via.placeholder.com/150
+                hostname:
+                  type: string
+                  example: telraam
+                createdAt:
+                  type: string
+                  example: "2020-11-10T11:56:55.000Z"
+                updatedAt:
+                  type: string
+                  example: "2020-11-10T11:56:55.000Z"
+                IPReports:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      ip:
+                        type: string
+                        example: 123.2.2.1
+                      mac:
+                        type: string
+                        example: AA:BB:CC:DD:EE:FF
+                      DeviceId:
+                        type: integer
+                        example: 1
+                      createdAt:
+                        type: string
+                        example: "2020-11-10T11:56:55.000Z"
+                      updatedAt:
+                        type: string
+                        example: "2020-11-10T11:56:55.000Z"
+                User:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 2
+                    firstname:
+                      type: string
+                      example: Nico
+                    lastname:
+                      type: string
+                      example: De Witte
+        404:
+          description: Device not found
+        409:
+          description: Device has no owner or you don't own the device
+definitions:
+  Device:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+        example: Telraam
+      type:
+        type: string
+        example: Raspberry Pi 3
+      description:
+        type: string
+        example: Counts the number of vehicles passing by
+      location:
+        type: string
+        example: LAB 2.85
+      image:
+        type: string
+        format: url
+        example: https://via.placeholder.com/150
+      hostname:
+        type: string
+        example: telraam
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /BioBoost/my-devices/1.0.0
+schemes:
+ - https
