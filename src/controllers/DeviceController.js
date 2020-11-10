@@ -40,7 +40,6 @@ module.exports = {
   async claim(req, res) {
     try {
       let device = await Devices.findById(req.params.id);
-      console.log(device)
 
       if (!device) Responder.resource_not_found(res, 'device');
       else if (device.User) Responder.conflict(res, 'Device has already been claimed');
@@ -48,6 +47,28 @@ module.exports = {
 
         await device.update({
           UserId: req.user.id
+        })
+
+        device = await Devices.findById(req.params.id);
+        Responder.ok(res, device);
+      }
+    } catch (error) {
+      console.log(error);
+      Responder.internal(res, 'An unknown error has occurred while updating the device.');
+    }
+  },
+
+  async release(req, res) {
+    try {
+      let device = await Devices.findById(req.params.id);
+
+      if (!device) Responder.resource_not_found(res, 'device');
+      else if (!device.User) Responder.conflict(res, 'Device has no owner');
+      else if (device.User.id !== req.user.id) Responder.conflict(res, 'You do not own this device');
+      else {
+
+        await device.update({
+          UserId: null
         })
 
         device = await Devices.findById(req.params.id);
