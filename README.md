@@ -2,6 +2,8 @@
 
 My-Devices is a web app that allows devices in a network to publish stats about their system. It also provides an endpoint for the detection script to post it's findings.
 
+The basic API is almost fully documented at [Swagger.io](https://app.swaggerhub.com/apis/BioBoost/my-devices/1.0.0).
+
 ## Docker-compose
 
 To start the app in development mode:
