@@ -1,6 +1,7 @@
 const { Device } = require("../models");
 const Devices = require('../repositories/Devices');
 const Responder = require('../helpers/responder.js');
+const IPReports = require("../repositories/IPReports");
 
 module.exports = {
 
@@ -32,6 +33,11 @@ module.exports = {
       let deviceDetails = req.body;
       deviceDetails.DeviceInterfaces = deviceDetails.interfaces;
       const device = await Devices.create(req.body);
+
+      device.DeviceInterfaces.forEach(interface => {
+        IPReports.bindToDevice(device.id, interface.mac);
+      });
+
       res.status(201).send(device);
     } catch (error) {
       console.log(error);

@@ -24,6 +24,8 @@ let Devices = {
       attributes: { exclude: ['UserId',] },
       include: [{
         model: db.IPReport,
+        limit: 1,
+        order: [[ 'id', 'DESC']],
       },{
         model: db.User,
         attributes: {
@@ -38,7 +40,6 @@ let Devices = {
       where: {
         id: id
       },
-      order: [[ db.IPReport, 'id', 'DESC']],
     })
   },
 

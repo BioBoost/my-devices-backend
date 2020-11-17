@@ -23,6 +23,19 @@ let IPReports = {
   create: (obj) => {
     return db.IPReport.create(obj);
   },
+
+  bindToDevice: (deviceId, mac) => {
+    return db.IPReport.update({
+        DeviceId: deviceId
+      },
+      {
+        where: {
+          mac: mac
+        }
+      }
+    )
+  },
+
 }
 
 module.exports = IPReports;
