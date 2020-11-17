@@ -32,6 +32,17 @@ let Devices = {
     })
   },
 
+  findByMAC: (mac) => {
+    return db.Device.findOne({
+      include: [{
+        model: db.IPReport,
+        where: {
+          mac: mac
+        }
+      }]
+    })
+  },
+
   create: (obj) => {
     return db.Device.create(obj);
   }

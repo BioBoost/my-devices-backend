@@ -1,4 +1,5 @@
 const DeviceController = require("../controllers/DeviceController");
+const IPReportController = require("../controllers/IPReportController");
 const AuthenticationController = require("../controllers/AuthenticationController");
 
 const passport = require('passport');
@@ -41,5 +42,8 @@ app.get('/devices/:id', Authorization.required, DeviceController.show);
 app.post('/devices', Authorization.required, validate.body(deviceSchema.create.body), DeviceController.create);
 app.patch('/devices/:id/claim', Authorization.required, DeviceController.claim);
 app.patch('/devices/:id/release', Authorization.required, DeviceController.release);
+
+// Reports
+app.post('/ipreports', Authorization.required, IPReportController.create);
 
 module.exports = app;
