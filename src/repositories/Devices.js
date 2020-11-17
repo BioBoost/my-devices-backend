@@ -10,6 +10,11 @@ let Devices = {
         attributes: {
           exclude: ['email', 'password', 'createdAt', 'updatedAt'],    
         }
+      },{
+        model: db.DeviceInterface,
+        attributes: {
+          exclude: ['DeviceId', 'createdAt', 'updatedAt'],
+        }
       }],
     })
   },
@@ -24,6 +29,11 @@ let Devices = {
         attributes: {
           exclude: ['email', 'password', 'createdAt', 'updatedAt'],    
         }
+      },{
+        model: db.DeviceInterface,
+        attributes: {
+          exclude: ['DeviceId', 'createdAt', 'updatedAt'],
+        }
       }],
       where: {
         id: id
@@ -35,7 +45,7 @@ let Devices = {
   findByMAC: (mac) => {
     return db.Device.findOne({
       include: [{
-        model: db.IPReport,
+        model: db.DeviceInterface,
         where: {
           mac: mac
         }

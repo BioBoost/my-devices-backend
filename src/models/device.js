@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       models.Device.hasMany(models.IPReport, {
         onDelete: "CASCADE"
       }),
+      models.Device.hasMany(models.DeviceInterface, {
+        onDelete: "CASCADE"
+      }),
       models.Device.belongsTo(models.User, {
         onDelete: "CASCADE"
       })
