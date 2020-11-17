@@ -20,6 +20,18 @@ module.exports = {
       DeviceId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
+    },{
+      ip: '168.23.32.1',
+      mac: '22:BB:CC:DD:EE:FF',
+      DeviceId: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      ip: '168.23.32.1',
+      mac: '33:BB:CC:DD:EE:FF',
+      DeviceId: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
   },
 
