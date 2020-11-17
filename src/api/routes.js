@@ -44,6 +44,7 @@ app.patch('/devices/:id/claim', Authorization.required, DeviceController.claim);
 app.patch('/devices/:id/release', Authorization.required, DeviceController.release);
 
 // Reports
+app.get('/ipreports/orphaned', Authorization.required, IPReportController.orphaned);
 app.post('/ipreports', Authorization.required, IPReportController.create);
 
 module.exports = app;

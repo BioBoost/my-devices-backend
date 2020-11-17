@@ -5,6 +5,16 @@ const Devices = require("../repositories/Devices");
 
 module.exports = {
 
+  async orphaned(req, res) {
+    try {
+      const ipreports = await IPReports.findOrphaned();
+      res.send(ipreports);
+    } catch (error) {
+      console.log(error);
+      Responder.internal(res, 'An error occurred while retrieving list of IP Reports.');
+    }
+  },
+
   async create(req, res) {
     try {
       const device = await Devices.findByMAC(req.body.mac);
