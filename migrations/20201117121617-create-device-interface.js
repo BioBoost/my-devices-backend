@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       mac: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       DeviceId: {
         type: Sequelize.INTEGER

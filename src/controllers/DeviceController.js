@@ -29,11 +29,17 @@ module.exports = {
 
   async create(req, res) {
     try {
+      let deviceDetails = req.body;
+      deviceDetails.DeviceInterfaces = deviceDetails.interfaces;
       const device = await Devices.create(req.body);
       res.status(201).send(device);
     } catch (error) {
       console.log(error);
-      Responder.internal(res, 'An unknown error has occurred while creating the device.');
+      if (error.name === "SequelizeUniqueConstraintError") {
+        Responder.conflict(res, "The interface mac has already been used");
+      } else {
+        Responder.internal(res, 'An unknown error has occurred while creating the device.');
+      }
     }
   },
 

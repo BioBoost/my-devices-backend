@@ -54,7 +54,10 @@ let Devices = {
   },
 
   create: (obj) => {
-    return db.Device.create(obj);
+    return db.Device.create(
+      obj,
+      { include: [db.DeviceInterface] }
+    );
   }
 }
 

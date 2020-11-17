@@ -8,7 +8,10 @@ module.exports = {
       description: Joi.string(),
       location: Joi.string(),
       image: Joi.string(),
-      hostname: Joi.string()
+      hostname: Joi.string(),
+      interfaces: Joi.array().items(Joi.object({
+        mac: Joi.string().required()
+      })).required()
     })
   },
 
