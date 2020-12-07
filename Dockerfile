@@ -1,5 +1,5 @@
 # The base image to start from
-FROM node:12.18-buster
+FROM node:12.19.0-alpine3.12
 
 # Setup working directory for the app
 WORKDIR /app
