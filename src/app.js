@@ -10,15 +10,29 @@ const session = require('express-session');
 
 app.use(bodyParser.json());
 
-// Cross-Origin Resource Sharing
-const origin = `${config.frontend.protocol}://${config.frontend.domain}`
-                + ((config.frontend.port != 80 && config.frontend.port != 443) ?
-                  `:${config.frontend.port}` : '');
-console.log(`Origin: ${origin}`);
+// Cross-Origin Resource Sharing (single domain)
+// const origin = `${config.frontend.protocol}://${config.frontend.domain}`
+//                 + ((config.frontend.port != 80 && config.frontend.port != 443) ?
+//                   `:${config.frontend.port}` : '');
+// console.log(`Origin: ${origin}`);
+// app.use(cors({
+//   credentials: true,
+//   origin: origin
+// }));
+
+// Multiple
+// const whitelist = [
+//   'https://mobile-apps-rd.netlify.app',
+//   'https://mobile-apps-mva.netlify.app',
+//   /\.netlify\.app$/    // Multiple subdomains using RegEx
+// ];
+
+// Works :)
+const whitelist = /\.netlify\.app$/   // Multiple subdomains using RegEx
 
 app.use(cors({
-  credentials: true,
-  origin: origin
+  origin: whitelist,
+  credentials: true
 }));
 
 app.use(session({
