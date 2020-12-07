@@ -59,6 +59,17 @@ paths:
                     lastname:
                       type: string
                       example: De Witte
+                DeviceInterfaces:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      mac:
+                        type: string
+                        example: "aa:bb:cc:dd:ee:ff"
     post:
       tags:
       - users
@@ -126,6 +137,17 @@ paths:
                 updatedAt:
                   type: string
                   example: "2020-11-10T11:56:55.000Z"
+                DeviceInterfaces:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      mac:
+                        type: string
+                        example: "aa:bb:cc:dd:ee:ff"
                 IPReports:
                   type: array
                   items:
@@ -213,6 +235,17 @@ paths:
                 updatedAt:
                   type: string
                   example: "2020-11-10T11:56:55.000Z"
+                DeviceInterfaces:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      mac:
+                        type: string
+                        example: "aa:bb:cc:dd:ee:ff"
                 IPReports:
                   type: array
                   items:
@@ -302,6 +335,17 @@ paths:
                 updatedAt:
                   type: string
                   example: "2020-11-10T11:56:55.000Z"
+                DeviceInterfaces:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      mac:
+                        type: string
+                        example: "aa:bb:cc:dd:ee:ff"
                 IPReports:
                   type: array
                   items:
@@ -366,6 +410,16 @@ definitions:
       hostname:
         type: string
         example: telraam
+      interfaces:
+        type: array
+        items:
+          type: object
+          required:
+          - mac
+          properties:
+            mac:
+              type: string
+              example: "aa:bb:cc:dd:ee:ff"
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
 basePath: /BioBoost/my-devices/1.0.0

@@ -9,6 +9,7 @@ const Authorization = require('../helpers/authorization');
 const validate = require('../validation/validate');
 const deviceSchema = require('../validation/schemas/device');
 const userSchema = require('../validation/schemas/user');
+const ipReportSchema = require('../validation/schemas/ip_report');
 
 const express = require("express");
 app = express.Router();
@@ -45,6 +46,6 @@ app.patch('/devices/:id/release', Authorization.required, DeviceController.relea
 
 // Reports
 app.get('/ipreports/orphaned', Authorization.required, IPReportController.orphaned);
-app.post('/ipreports', IPReportController.create);    // NEEDS Auth LATER !
+app.post('/ipreports', validate.body(ipReportSchema.create.body), IPReportController.create);    // NEEDS Auth LATER !
 
 module.exports = app;

@@ -11,11 +11,14 @@ const session = require('express-session');
 app.use(bodyParser.json());
 
 // Cross-Origin Resource Sharing
+const origin = `${config.frontend.protocol}://${config.frontend.domain}`
+                + ((config.frontend.port != 80 && config.frontend.port != 443) ?
+                  `:${config.frontend.port}` : '');
+console.log(`Origin: ${origin}`);
+
 app.use(cors({
   credentials: true,
-  origin: `${config.frontend.protocol}://${config.frontend.domain}`
-    + ((config.frontend.port != 80 && config.frontend.port != 443) ?
-      `:${config.frontend.port}` : '')
+  origin: origin
 }));
 
 app.use(session({

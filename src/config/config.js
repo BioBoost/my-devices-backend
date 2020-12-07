@@ -4,9 +4,9 @@ dotenv.config();
 module.exports = {
   general: {
     environment: process.env.NODE_ENV || "development",
-    port: process.env.PORT || 8081,
-    domain: process.env.DOMAIN || "localhost",
-    protocol: process.env.PROTOCOL || "http"
+    port: process.env.BACKEND_PORT || 8081,
+    domain: process.env.BACKEND_DOMAIN || "localhost",
+    protocol: process.env.BACKEND_PROTOCOL || "http"
   },
   frontend: {
     protocol: process.env.FRONTEND_PROTOCOL || "http",
